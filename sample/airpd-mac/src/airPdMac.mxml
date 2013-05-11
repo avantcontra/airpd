@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/////////////////////////////////////////////////
+//  
+//  Copyright (c) 2013 Contra.
+//  More information see the file "LICENSE.txt". 
+//
+/////////////////////////////////////////////////
+-->
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   applicationComplete="appInit(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import im.contra.airpd.extension.PdExtension;
+		
+			private var _pd:PdExtension = null;
+			
+			private function appInit(e:Event):void
+			{
+				_pd = PdExtension.getInstance();
+				_pd.addEventListener(StatusEvent.STATUS, onPdMessage, false, 0, true);
+			}
+			
+			private function onInitClick():void
+			{
+				var res:Boolean = _pd.init(1, 2, 44100);
+				trace(res);
+				debug("PD inited: " + res.toString());
+			}
+			
+			private function onOpen():void
+			{
+				var f:File = new File();
+				var docFilter:FileFilter = new FileFilter("Puredata", "*.pd");
+				
+				f.addEventListener(Event.SELECT, onSelect);
+				f.browseForOpen("select", [docFilter]);
+			}
+			
+			private function onSelect(e:Event):void
+			{
+				//	trace(e);
+				var f:File = e.currentTarget as File;
+				var path:String = f.nativePath.slice(0, f.nativePath.indexOf(f.name));
+				var res:Object = _pd.openPatch(f.name, path);
+				trace(res);
+				debug("PD opened: " + res.toString());
+			}
+			
+			private function sendFloat():void
+			{
+				_pd.sendFloat("fromAIRPD", ns.value);
+			}
+			
+			private function debug(message:String):void
+			{
+				ta.text += "\n";
+				ta.text += message;
+			}
+			
+			private function onPdMessage(e:StatusEvent):void
+			{
+				debug("msg from PD: " + e["level"] + ", " + e["code"]);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<s:Button label="init pd" x="0" y="0" click="onInitClick()"/>
+	<s:Button label="openPatch" x="0" y="0" click="onOpen()"/>
+	<s:HGroup>
+		<s:Button label="sendFloat" x="0" y="0" click="sendFloat()"/>
+		<s:NumericStepper id="ns" minimum="10" maximum="200"/>
+	</s:HGroup>
+	
+	<s:TextArea id="ta" text="===debug info====" width="100%" height="300" x="0" y="30" editable="false"/>
+	
+</s:WindowedApplication>
