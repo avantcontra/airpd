@@ -1,0 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright (c) 2013 Contra.
+// More information see the file "LICENSE.txt".
+//
+////////////////////////////////////////////////////////////////////////////////
+#ifndef PDExtension_ExtensionConfig_h
+#define PDExtension_ExtensionConfig_h
+
+#ifdef AIRPD_OS_WINDOWS
+	#include <windows.h>
+	#include <ole2.h>
+#endif
+
+#endif
