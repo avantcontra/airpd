@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////
+//  
+// Copyright (c) 2013 Contra.
+// More information see the file "LICENSE.txt". 
+//
+////////////////////////////////////////////////////////////////////////////////
 package im.contra.airpd.extension
 {
 	
@@ -213,28 +219,8 @@ package im.contra.airpd.extension
 		
 		private function onPdMessage(e:StatusEvent):void
 		{
-			trace("===from ane:");
-			trace("level:", e["level"], "|", "code:", e["code"]);
-			switch(e["level"])
-			{
-				case "msg.symbol":
-					/*var index:int = String(e["code"]).indexOf("DATA_F:");
-					if(index > -1)
-					{
-					var fs:String = String(e["code"]).substring(index + "DATA_F:".length);
-					fs = StringUtil.trim(fs);
-					var f:Number = Number(fs);
-					trace(f);
-					speedF = f;
-					buildSound();
-					}*/
-					
-					break;
-			}
+			this.dispatchEvent(e);
 		}
-		
-		
-			
 		
 	}
 }
