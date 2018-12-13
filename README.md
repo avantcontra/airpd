@@ -26,7 +26,7 @@ The xcode project I strongly recommended Dan Wilcox's work: https://github.com/l
 ####AIR
 I use AIR SDK 3.7, so it may need add "-swf-version 18" when compiling AIR app.
 
-userfulllll
+usefulllll
 =====
 Pure Data: http://puredata.info
 
