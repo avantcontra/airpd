@@ -40,4 +40,4 @@ Build AIR ane on multi-platform:
 https://github.com/AS3NUI/airkinect-2-core
 
 --------------------
-cheers~ Contra www.floatbug.com/contra dadadaluo[at]gmail.com
+cheers~ Contra www.floatbug.com/ dadadaluo[at]gmail.com
